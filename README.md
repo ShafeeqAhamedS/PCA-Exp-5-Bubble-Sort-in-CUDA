@@ -6,11 +6,11 @@
 ## AIM:
 To Implement Bubble Sort and Merge Sort on the GPU using CUDA to enhance the performance of sorting tasks by parallelizing comparisons and swaps within the sorting algorithm.
 
-## Code Overview:
-CUDA implementation of Bubble Sort and Merge Sort. The code initializes an unsorted array, applies the Bubble Sort, Merge Sort algorithm in parallel on the GPU, and returns the sorted array as output.
-
 ## EQUIPMENTS REQUIRED:
-Hardware – PCs with NVIDIA GPU & CUDA NVCC, Google Colab with NVCC Compiler, CUDA Toolkit installed, and sample datasets for testing.
+- Hardware
+   - PCs with NVIDIA GPU & CUDA NVCC
+   - Google Colab with NVCC Compiler, CUDA Toolkit installed
+
 
 ## PROCEDURE:
 
@@ -50,7 +50,6 @@ Hardware – PCs with NVIDIA GPU & CUDA NVCC, Google Colab with NVCC Compiler, C
 
 ## PROGRAM:
 ```c
-%%cuda
 #include <stdio.h>
 #include <stdlib.h>
 #include <cuda.h>
@@ -312,12 +311,10 @@ int main() {
 
             // Merge Sort CPU
             mergeSortCPU(arr, n);
-
             // Generating random array again for Merge Sort
             for (int i = 0; i < n; i++) {
                 arr[i] = rand() % 1000;
             }
-
             // Merge Sort GPU
             mergeSort(arr, n, blockSize, numBlocks);
             printf("\n");
@@ -330,9 +327,10 @@ int main() {
 
 ## OUTPUT:
 
-Performance Comparison: CPU vs GPU
+### Performance Comparison: CPU vs GPU
 
-![image](https://github.com/user-attachments/assets/97a2b3d7-97fa-4cee-9155-60e71fe0efb3)
+<img style="display=inline" src="https://github.com/user-attachments/assets/f5be4f54-cb69-430e-a78f-2d9812d2bb0e" height="250"/>
+
 
 <table style="text-align=center">
         <thead>
