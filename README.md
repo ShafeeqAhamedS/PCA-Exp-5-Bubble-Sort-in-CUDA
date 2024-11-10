@@ -14,17 +14,39 @@ Hardware – PCs with NVIDIA GPU & CUDA NVCC, Google Colab with NVCC Compiler, C
 
 ## PROCEDURE:
 
-Tasks:
+1. **Initialize the CUDA Environment**:
+   - Set up the necessary hardware and software for CUDA programming, including an NVIDIA GPU and NVCC compiler (Google Colab with CUDA Toolkit if using a cloud environment).
 
-1. Modify the Kernel:
-   - Implement Bubble Sort and Merge Sort using CUDA by assigning each comparison and swap task to individual threads.
-   - Ensure the kernel checks boundaries to avoid out-of-bounds access, particularly for edge cases.
-2. Performance Analysis:
-   - Measure the execution time of the CUDA Bubble Sort with different array sizes (e.g., 512, 1024, 2048 elements).
-   - Experiment with various block sizes (e.g., 16, 32, 64 threads per block) to analyze their effect on execution time and efficiency.
-3. Comparison:
-   - Compare the performance of the CUDA-based Bubble Sort and Merge Sort with a CPU-based Bubble Sort and Merge Sort implementation.
-   - Discuss the differences in execution time and explain the limitations of Bubble Sort and Merge Sort when parallelized on the GPU.
+2. **Define Bubble Sort and Merge Sort Kernels**:
+   - **Bubble Sort Kernel**: Define a CUDA kernel to perform Bubble Sort using a single block and parallelizing comparisons and swaps across threads. Each thread performs a comparison and swap if necessary, iterating over multiple passes.
+   - **Merge Sort Kernel**: Define a CUDA kernel to perform Merge Sort in stages, where each thread merges sub-arrays, doubling the size of merged sub-arrays in each iteration.
+
+3. **Memory Allocation on Device**:
+   - Allocate device memory for the arrays to be sorted (using `cudaMalloc`).
+   - Copy data from the host (CPU) array to the device (GPU) using `cudaMemcpy`.
+
+4. **Kernel Execution and Synchronization**:
+   - Launch the Bubble Sort kernel or Merge Sort kernel on the GPU. Use appropriate block and grid dimensions, such as specifying block size and calculating the required number of blocks.
+   - Use `__syncthreads()` to synchronize threads after each pass in the sorting kernels, ensuring correct data access.
+
+5. **CPU Sorting Functions**:
+   - Implement Bubble Sort and Merge Sort for the CPU to compare performance. Measure execution time using high-resolution clock timers from the `chrono` library.
+
+6. **Run Sorting Algorithms**:
+   - Test both algorithms with arrays of different sizes (500 and 1000 elements) and configurations (different block sizes).
+   - For each sorting algorithm, execute both CPU and GPU implementations and measure execution times.
+
+7. **Measure and Compare Performance**:
+   - Record the GPU execution time using `cudaEventRecord` for precise time tracking.
+   - Compare the CPU and GPU execution times for both sorting algorithms, noting the effect of different block sizes and array sizes.
+
+8. **Copy Data Back to Host and Clean Up**:
+   - After the GPU kernel completes, copy the sorted array back to the host.
+   - Free the allocated device memory to prevent memory leaks.
+
+9. **Output Results**:
+   - Print the execution times of Bubble Sort and Merge Sort on both CPU and GPU, formatted in a table for comparison.
+   - Analyze the performance improvement observed due to parallelization on the GPU.
 
 ## PROGRAM:
 ```c
